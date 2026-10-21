@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#08111f">
+<meta name="description" content="NetScope 360 - Interactive networking tools for IT students.">
+<title>NetScope 360 | Network Lab</title>
+<style>
+:root{color-scheme:dark;--bg:#08111f;--panel:#101d30;--line:#243650;--text:#eaf2ff;--muted:#94a7c1;--mint:#5ce8bd;--blue:#85a7ff}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 75% 0%,#17304a 0,transparent 42%),var(--bg);color:var(--text);font:15px system-ui,Arial,sans-serif}
+header{padding:23px max(5%,calc((100% - 1100px)/2));border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+.brand{font-size:22px;font-weight:800;letter-spacing:-1px}.brand span{color:var(--mint)}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.lang,.action{padding:10px 15px;border-radius:9px;border:1px solid var(--line);background:#17263b;color:var(--text)}
+main{max-width:1100px;margin:auto;padding:38px 20px}
+.hero{padding:30px 0 38px}
+.tag{color:var(--mint);font-size:12px;font-weight:700;letter-spacing:2px}
+h1{font-size:clamp(35px,6vw,58px);line-height:1.1;letter-spacing:-2px;margin:15px 0}
+h1 span{color:var(--mint)}
+.hero p,.muted{color:var(--muted);line-height:1.8;max-width:680px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}
+.card{padding:23px;background:linear-gradient(145deg,#122239,#0c192a);border:1px solid var(--line);border-radius:16px;min-width:0}
+.card h2{font-size:20px;margin:0 0 8px}
+.card p{color:var(--muted);font-size:13px;line-height:1.7}
+label{display:block;color:#b9c9dd;font-size:13px;margin:16px 0 7px}
+input,select{width:100%;padding:12px;border-radius:9px;background:#081523;border:1px solid #314660;color:white;margin-top:6px}
+.primary{width:100%;margin-top:14px;padding:12px;border:0;border-radius:9px;background:var(--mint);color:#062219;font-weight:800}
+.results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:16px}
+.result{padding:11px;border:1px solid var(--line);background:#091625;border-radius:8px;overflow-wrap:anywhere}
+.result small{display:block;color:var(--muted);margin-bottom:5px}
+.result strong{font-size:13px;color:var(--mint)}
+#quizQuestion{font-size:17px;font-weight:700;margin:18px 0}
+.answer{display:block;text-align:left;width:100%;padding:11px;margin:8px 0;background:#0a1727;border:1px solid var(--line);border-radius:8px;color:var(--text)}
+.answer:hover{border-color:var(--mint)}
+.answer:disabled{cursor:default;opacity:1}
+#feedback{line-height:1.7;color:var(--mint);font-size:13px;margin-top:12px}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:15px}
+th,td{text-align:left;padding:12px;border-bottom:1px solid var(--line)}
+th{color:var(--mint)}
+footer{border-top:1px solid var(--line);padding:25px 15px;text-align:center;color:var(--muted);font-size:12px}
+[dir=rtl] body{text-align:right;font-family:Tahoma,Arial,sans-serif}
+[dir=rtl] .answer,[dir=rtl] th,[dir=rtl] td{text-align:right}
+@media(max-width:650px){.grid{grid-template-columns:1fr}main{padding:20px 13px}.hero{padding-top:20px}.card{padding:17px}header{padding:17px}.results{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">NetScope <span>360°</span></div>
+  <button class="lang" id="lang">العربية / English</button>
+</header>
+<main>
+  <section class="hero">
+    <div class="tag" data-en="YOUR INTERACTIVE NETWORK LAB" data-ar="مختبر الشبكات التفاعلي الخاص بك">YOUR INTERACTIVE NETWORK LAB</div>
+    <h1 data-en="Understand networks.<br><span>Build real skills.</span>" data-ar="افهم الشبكات.<br><span>اكتسب مهارات حقيقية.</span>">Understand networks.<br><span>Build real skills.</span></h1>
+    <p data-en="A practical networking playground for IT students. Calculate IPv4 subnets, explore common ports, and test your knowledge — right in your browser." data-ar="مختبر عملي لطلاب تقنية المعلومات. احسب شبكات IPv4، واكتشف المنافذ الشائعة، واختبر معلوماتك مباشرة في المتصفح.">A practical networking playground for IT students. Calculate IPv4 subnets, explore common ports, and test your knowledge — right in your browser.</p>
+  </section>
+
+  <div class="grid">
+    <section class="card">
+      <h2 data-en="01 / Subnet Calculator" data-ar="01 / حاسبة الشبكات الفرعية">01 / Subnet Calculator</h2>
+      <p data-en="Enter an IPv4 address and CIDR prefix." data-ar="أدخل عنوان IPv4 وطول البادئة CIDR.">Enter an IPv4 address and CIDR prefix.</p>
+      <label for="ip" data-en="IPv4 address" data-ar="عنوان IPv4">IPv4 address</label>
+      <input id="ip" value="192.168.1.25" placeholder="192.168.1.25">
+      <label for="cidr" data-en="CIDR prefix" data-ar="بادئة CIDR">CIDR prefix</label>
+      <select id="cidr"></select>
+      <button class="primary" id="calculate" data-en="Calculate subnet" data-ar="احسب الشبكة">Calculate subnet</button>
+      <div id="subnetResults" class="results" aria-live="polite"></div>
+      <p id="subnetError" role="alert"></p>
+    </section>
+
+    <section class="card">
+      <h2 data-en="02 / Networking Quiz" data-ar="02 / اختبار الشبكات">02 / Networking Quiz</h2>
+      <p data-en="Test your fundamentals and learn from each answer." data-ar="اختبر أساسياتك وتعلم من كل إجابة.">Test your fundamentals and learn from each answer.</p>
+      <div id="quizProgress" class="tag"></div>
+      <div id="quizQuestion"></div>
+      <div id="answers"></div>
+      <div id="feedback" aria-live="polite"></div>
+      <button class="action" id="next" data-en="Next question →" data-ar="السؤال التالي ←" hidden>Next question →</button>
+    </section>
+
+    <section class="card" style="grid-column:1/-1">
+      <h2 data-en="03 / Port Explorer" data-ar="03 / مستكشف المنافذ">03 / Port Explorer</h2>
+      <p data-en="Search common network ports and learn what their services do." data-ar="ابحث عن منافذ الشبكة الشائعة وتعرف على وظائف خدماتها.">Search common network ports and learn what their services do.</p>
+      <label for="portSearch" data-en="Search ports or services" data-ar="ابحث عن منفذ أو خدمة">Search ports or services</label>
+      <input id="portSearch" placeholder="SSH, 443, DNS...">
+      <div class="tablewrap">
+        <table>
+          <thead><tr>
+            <th data-en="PORT" data-ar="المنفذ">PORT</th>
+            <th data-en="SERVICE" data-ar="الخدمة">SERVICE</th>
+            <th data-en="PROTOCOL" data-ar="البروتوكول">PROTOCOL</th>
+            <th data-en="PURPOSE" data-ar="الوظيفة">PURPOSE</th>
+          </tr></thead>
+          <tbody id="ports"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</main>
+<footer>NetScope 360 · <span data-en="Built for IT learners" data-ar="صُنع لمتعلمي تقنية المعلومات">Built for IT learners</span> · <a href="https://github.com/ILyasZobair/netscope-360" style="color:#5ce8bd">GitHub</a></footer>
+
+<script>
+const $=id=>document.getElementById(id);
+let language='en';
+
+for(let i=0;i<=32;i++){
+  const o=document.createElement('option');
+  o.value=i;o.textContent='/'+i;
+  if(i===24)o.selected=true;
+  $('cidr').append(o);
+}
+
+function ipv4(value){
+  const p=value.trim().split('.');
+  if(p.length!==4||p.some(x=>!/^(0|[1-9]\\d{0,2})$/.test(x)||+x>255))return null;
+  return p.reduce((n,x)=>n*256+Number(x),0);
+}
+function address(n){
+  return [24,16,8,0].map(s=>Math.floor(n/2**s)%256).join('.');
+}
+function calculate(){
+  const ip=ipv4($('ip').value);
+  const prefix=Number($('cidr').value);
+  const error=$('subnetError'),out=$('subnetResults');
+  out.replaceChildren();error.textContent='';
+  if(ip===null){error.textContent=language==='en'?'Invalid IPv4 address. Example: 192.168.1.25':'عنوان IPv4 غير صالح. مثال: 192.168.1.25';return;}
+  const size=2**(32-prefix);
+  const mask=prefix===0?0:(0xffffffff<<(32-prefix))>>>0;
+  const network=Math.floor(ip/size)*size;
+  const broadcast=network+size-1;
+  const hosts=prefix<=30?Math.max(0,size-2):prefix===31?2:1;
+  const items=[
+    [language==='en'?'Network address':'عنوان الشبكة',address(network)],
+    [language==='en'?'Subnet mask':'قناع الشبكة',address(mask)],
+    [language==='en'?'Broadcast address':'عنوان البث',address(broadcast)],
+    [language==='en'?'First address':'أول عنوان',address(prefix<=30?network+1:network)],
+    [language==='en'?'Last address':'آخر عنوان',address(prefix<=30?broadcast-1:broadcast)],
+    [language==='en'?'Total addresses':'إجمالي العناوين',size.toLocaleString()],
+    [language==='en'?'Usable hosts*':'الأجهزة القابلة للاستخدام*',hosts.toLocaleString()],
+    ['CIDR','/'+prefix]
+  ];
+  items.forEach(([label,value])=>{
+    const d=document.createElement('div');d.className='result';
+    const small=document.createElement('small');small.textContent=label;
+    const strong=document.createElement('strong');strong.textContent=value;
+    d.append(small,strong);out.append(d);
+  });
+}
+$('calculate').addEventListener('click',calculate);
+$('ip').addEventListener('keydown',e=>{if(e.key==='Enter')calculate()});
+
+const portData=[
+[20,'FTP Data','TCP','File transfer data channel'],
+[21,'FTP Control','TCP','File transfer control'],
+[22,'SSH','TCP','Secure remote administration'],
+[23,'Telnet','TCP','Unencrypted remote terminal'],
+[25,'SMTP','TCP','Email transfer'],
+[53,'DNS','TCP/UDP','Domain name resolution'],
+[67,'DHCP Server','UDP','Automatic IPv4 configuration'],
+[68,'DHCP Client','UDP','Receives network configuration'],
+[80,'HTTP','TCP','Unencrypted web traffic'],
+[110,'POP3','TCP','Email retrieval'],
+[123,'NTP','UDP','Time synchronization'],
+[143,'IMAP','TCP','Email access and synchronization'],
+[161,'SNMP','UDP','Network monitoring'],
+[389,'LDAP','TCP/UDP','Directory services'],
+[443,'HTTPS','TCP','Encrypted web traffic'],
+[445,'SMB','TCP','Windows file sharing'],
+[587,'SMTP Submission','TCP','Email submission'],
+[853,'DNS over TLS','TCP','Encrypted DNS transport'],
+[993,'IMAPS','TCP','Encrypted IMAP'],
+[3389,'RDP','TCP/UDP','Remote desktop']
+];
+function renderPorts(){
+  const q=$('portSearch').value.toLowerCase().trim();
+  const tbody=$('ports');tbody.replaceChildren();
+  const matches=portData.filter(p=>p.join(' ').toLowerCase().includes(q));
+  matches.forEach(p=>{
+    const tr=document.createElement('tr');
+    p.forEach(v=>{const td=document.createElement('td');td.textContent=v;tr.append(td)});
+    tbody.append(tr);
+  });
+  if(!matches.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=4;td.textContent=language==='en'?'No matching ports':'لا توجد منافذ مطابقة';tr.append(td);tbody.append(tr)}
+}
+$('portSearch').addEventListener('input',renderPorts);
+
+const questions=[
+{q:'What does DNS do?',a:['Encrypts files','Translates domain names to IP addresses','Assigns MAC addresses','Blocks all traffic'],correct:1,why:'DNS resolves domain names, such as example.com, to IP addresses.'},
+{q:'Which port is commonly used by HTTPS?',a:['21','22','80','443'],correct:3,why:'TCP port 443 is the standard port for HTTPS.'},
+{q:'How many bits are in an IPv4 address?',a:['16','32','64','128'],correct:1,why:'IPv4 addresses are 32 bits. IPv6 addresses are 128 bits.'},
+{q:'Which protocol automatically assigns IP settings?',a:['DHCP','SSH','FTP','HTTP'],correct:0,why:'DHCP can automatically provide IP addresses and other network settings.'},
+{q:'What does a router primarily do?',a:['Print documents','Forward packets between networks','Store passwords','Create web pages'],correct:1,why:'Routers forward IP packets between different networks.'},
+{q:'Which command commonly tests network reachability?',a:['mkdir','ping','rename','echo only'],correct:1,why:'Ping commonly uses ICMP echo messages to test reachability.'},
+{q:'Which device forwards Ethernet frames using MAC addresses?',a:['Switch','Modem only','Keyboard','Printer'],correct:0,why:'A Layer 2 switch forwards Ethernet frames based on MAC addresses.'},
+{q:'What is the purpose of a subnet mask?',a:['Identify network and host portions','Encrypt DNS','Increase CPU speed','Replace an IP address'],correct:0,why:'A subnet mask identifies which IPv4 bits represent the network portion.'}
+];
+let qi=0,score=0,answered=false;
+function renderQuiz(){
+  answered=false;$('next').hidden=true;
+  $('quizProgress').textContent=(language==='en'?'QUESTION ':'السؤال ')+(qi+1)+' / '+questions.length+' · '+(language==='en'?'SCORE ':'النتيجة ')+score;
+  $('quizQuestion').textContent=questions[qi].q;
+  $('feedback').textContent='';
+  const box=$('answers');box.replaceChildren();
+  questions[qi].a.forEach((answer,i)=>{
+    const b=document.createElement('button');b.className='answer';b.textContent=String.fromCharCode(65+i)+'. '+answer;
+    b.addEventListener('click',()=>choose(i));box.append(b);
+  });
+}
+function choose(i){
+  if(answered)return;answered=true;
+  const q=questions[qi],buttons=$('answers').querySelectorAll('button');
+  buttons.forEach((b,j)=>{b.disabled=true;if(j===q.correct)b.style.borderColor='#5ce8bd';});
+  if(i===q.correct){score++;$('feedback').textContent=(language==='en'?'Correct! ':'صحيح! ')+q.why;}
+  else $('feedback').textContent=(language==='en'?'Not quite. ':'ليس تمامًا. ')+q.why;
+  $('quizProgress').textContent=(language==='en'?'QUESTION ':'السؤال ')+(qi+1)+' / '+questions.length+' · '+(language==='en'?'SCORE ':'النتيجة ')+score;
+  $('next').hidden=false;
+}
+$('next').addEventListener('click',()=>{
+  qi++;
+  if(qi>=questions.length){
+    $('quizQuestion').textContent=language==='en'?'Quiz complete!':'اكتمل الاختبار!';
+    $('answers').replaceChildren();
+    $('feedback').textContent=(language==='en'?'Your score: ':'نتيجتك: ')+score+'/'+questions.length;
+    $('next').textContent=language==='en'?'Try again':'أعد الاختبار';
+    $('next').hidden=false;
+    $('next').onclick=()=>{qi=0;score=0;$('next').onclick=null;$('next').textContent=language==='en'?'Next question →':'السؤال التالي ←';renderQuiz()};
+  }else renderQuiz();
+});
+
+$('lang').addEventListener('click',()=>{
+  language=language==='en'?'ar':'en';
+  document.documentElement.lang=language;
+  document.documentElement.dir=language==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-en]').forEach(el=>el.innerHTML=el.dataset[language]);
+  $('ip').placeholder=language==='en'?'192.168.1.25':'مثال: 192.168.1.25';
+  $('portSearch').placeholder=language==='en'?'SSH, 443, DNS...':'ابحث عن SSH أو 443 أو DNS...';
+  $('next').textContent=language==='en'?'Next question →':'السؤال التالي ←';
+  renderPorts();calculate();renderQuiz();
+});
+$('year')?.remove();
+renderPorts();calculate();renderQuiz();
+</script>
+</body>
+</html>
